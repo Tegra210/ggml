@@ -12,6 +12,27 @@
 #include <vector>
 #include <iostream>
 #include <unistd.h>
+
+#ifdef _WIN32
+#ifndef WIN32_LEAN_AND_MEAN
+#define WIN32_LEAN_AND_MEAN
+#endif
+#include <windows.h>
+#include <io.h>
+
+#define STDIN_FILENO _fileno( stdin )
+#define STDOUT_FILENO _fileno( stdout )
+#define STDERR_FILENO _fileno( stdout )
+
+#define isatty _isatty
+
+#undef min
+#undef max
+
+#else
+#include <unistd.h>
+#endif
+
 #include <time.h>
 #include <algorithm>
 
